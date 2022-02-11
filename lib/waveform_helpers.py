@@ -1,6 +1,6 @@
 import os
 import csv
-from globals import CONFIG as c, DATA as d, config
+from waveform_globals import CONFIG as c, DATA as d, config
 
 def yes_no(text):
     while True:

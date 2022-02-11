@@ -1,7 +1,7 @@
 import requests
 import webbrowser
-from globals import config
-from helpers import *
+from waveform_globals import config
+from waveform_helpers import *
 
 wave_endpoint = "https://gql.waveapps.com/graphql/public"
 

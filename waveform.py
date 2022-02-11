@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 
+import sys, os
 import argparse
 import pathlib
-from helpers import *
-from globals import ERRORS as e, config as c
-import wave_api as wave
-import setup as setup
-import post as post
+
+current = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(current + '/lib')
+
+from waveform_helpers import *
+from waveform_globals import ERRORS as e, config as c
+import waveform_wave as wave
+import waveform_setup as setup
+import waveform_post as post
 
 def main_menu():
     while True:

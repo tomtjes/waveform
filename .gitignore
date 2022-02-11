@@ -1,5 +1,7 @@
 .env
 *.conf
 *.[Cc][Ss][Vv]
-private/**
+private**
 .DS_Store
+__pycache__**
+.vscode**

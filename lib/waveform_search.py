@@ -1,7 +1,7 @@
 import copy
-from globals import config
-from helpers import *
-import post as post
+from waveform_globals import config
+from waveform_helpers import *
+import waveform_post as post
 
 def replace(transactions, searches={}):
     if not searches:

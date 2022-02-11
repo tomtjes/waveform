@@ -1,8 +1,8 @@
-from helpers import *
-from globals import CONFIG as c, DATA as d, Transaction
-import setup as setup
-import search as search
-import wave_api as wave
+from waveform_helpers import *
+from waveform_globals import CONFIG as c, DATA as d, Transaction
+import waveform_setup as setup
+import waveform_search as search
+import waveform_wave as wave
 
 def get_fields():
     fields = {}

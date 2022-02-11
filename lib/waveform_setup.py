@@ -1,7 +1,7 @@
-from globals import config, Transaction, CONFIG as c
-from helpers import *
-import wave_api as wave
-import search as search
+from waveform_globals import config, Transaction, CONFIG as c
+from waveform_helpers import *
+import waveform_wave as wave
+import waveform_search as search
 
 def set_name(update=False):
     while True:
