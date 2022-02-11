@@ -2,3 +2,4 @@
 *.conf
 *.[Cc][Ss][Vv]
 private/**
+.DS_Store
