@@ -93,14 +93,19 @@ def main_csv_to_wave(config_name='', file=''):
     }
   }
         resp = wave.mutate(vars)
+        errormsg = ''
         try:
-            resp['data']['moneyTransactionCreate']['didSucceed']
-            print("SUCCESS: Transaction created.")
+            success = resp['data']['moneyTransactionCreate']['didSucceed']
+            if success:
+                print("SUCCESS: Transaction created.")
+            else:
+                errormsg = resp['data']['moneyTransactionCreate']['inputErrors'][0]['message'] 
         except:
-            if resp['data']['moneyTransactionCreate']:
-                errormsg =  resp['data']['moneyTransactionCreate']['inputErrors'][0]['message']
-            elif resp['errors'][0]['message']:
+            try:
                 errormsg = resp['errors'][0]['message']
+            except:
+                pass
+        if errormsg:
             print("ERROR: " + errormsg)
             print("Failed transaction: ")
             print('{} {:>10.2f} {:25} {:25} {:25}'.format(
@@ -109,4 +114,6 @@ def main_csv_to_wave(config_name='', file=''):
                 (t.description[:22] + "...") if len(t.description)>25 else t.description, 
                 (t.notes[:22] + "...") if len(t.notes)>25 else t.notes, 
                 (t.id[:22] + "...") if len(t.id)>25 else t.id))
+        elif not success:
+            print("ERROR: unknown error")
     return
