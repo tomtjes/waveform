@@ -63,7 +63,8 @@ def main_csv_to_wave(config_name='', file=''):
         print("\nABORTING\n")
         return
 
-    for t in transactions:
+    for i, t in enumerate(transactions):
+        print("\nTransaction " + str(i+1) + "/" + str(len(transactions)) + "... ", end='')
         if t.amount < 0:
             dir = "WITHDRAWAL"
             inc_exp = c.section.get('Account Expense')
@@ -92,11 +93,15 @@ def main_csv_to_wave(config_name='', file=''):
     }
   }
         resp = wave.mutate(vars)
-        resp = resp['data']['moneyTransactionCreate']
-        if resp['didSucceed']:
-            print("\nSUCCESS: Transaction created.")
-        else:
-            print("\nERROR: " + resp['inputErrors'][0]['message'])
+        try:
+            resp['data']['moneyTransactionCreate']['didSucceed']
+            print("SUCCESS: Transaction created.")
+        except:
+            if resp['data']['moneyTransactionCreate']:
+                errormsg =  resp['data']['moneyTransactionCreate']['inputErrors'][0]['message']
+            elif resp['errors'][0]['message']:
+                errormsg = resp['errors'][0]['message']
+            print("ERROR: " + errormsg)
             print("Failed transaction: ")
             print('{} {:>10.2f} {:25} {:25} {:25}'.format(
                 t.date.strftime('%Y-%m-%d'), 
