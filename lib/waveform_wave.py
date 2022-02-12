@@ -130,7 +130,7 @@ def eval_account(resp):
         accounts[i] = acc['node']
     return accounts
 
-def get_account():
+def get_account(update=False):
     q = """query ($businessId: ID!) {
   business(id: $businessId) {
     id
@@ -149,6 +149,9 @@ def get_account():
     operation_vars = { "businessId": c.section.get('Business') }
     resp = query(q, operation_vars)
     accounts = eval_account(resp)
+
+    if update:
+      accounts[len(accounts)] = ({"name" : "CANCEL and keep currently configured account", "id" : c.section['Account']})
 
     retval = print_menu(accounts,'name')
     print('Which account do you want to use? ')
@@ -198,8 +201,9 @@ def get_inc_exp_account(type, update=False):
 def update_wave():
     menu_options = { 
     0: "Update selected Wave business",
-    1: "Update Income Account",
-    2: "Update Expense Account"}
+    1: "Update checking/credit card/cash/loan account",
+    2: "Update income account",
+    3: "Update expense account"}
     r = print_menu(menu_options)
     r = menu_select(r)
     if r == -1:
@@ -208,7 +212,9 @@ def update_wave():
     elif r == 0:
         get_business()
     elif r == 1:
-        get_inc_exp_account('INCOME', True)
+        get_account(True)
     elif r == 2:
+        get_inc_exp_account('INCOME', True)
+    elif r == 3:
         get_inc_exp_account('EXPENSE', True)
     return
