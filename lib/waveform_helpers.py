@@ -55,7 +55,7 @@ def read_csv(file):
 
 def get_csv():
     print("\nPlease provide the path of a CSV file containing transactions.\nYou can drag and drop the file here (enter QUIT to quit): ")
-    csv_file = input()
+    csv_file = input().strip()
     while csv_file.lower() != 'quit':
         if not os.path.isfile(csv_file):
             print("Could not find file. Try again.")
